@@ -4,6 +4,15 @@ const fs = require("fs");
 
 const app = express();
 
+const dotenv = require('dotenv');
+
+dotenv.config({
+  path: `process.env`
+});
+
+const port = process.env.PORT || 7101 
+
+
 // Basic definition of the podlet
 const podlet = new Podlet({
   name: "vueReceivePod", // required
@@ -15,15 +24,15 @@ const podlet = new Podlet({
 
 // All css and js files in the build folder should be added to the podlet definition.
 let vueCssAssets = fs.readdirSync('dist/css');
-vueCssAssets.forEach((element, index) => {
+vueCssAssets.forEach((element) => {
   if(element.indexOf('.css') !== -1 && element.indexOf('.css.map') === -1){
-    podlet.css({ value: "http://localhost:7101/css/" + element });
+    podlet.css({ value: `${process.env.ENTRY_BASE_URL}/css/${element}`});
   }
 });
 let vueJsAssets = fs.readdirSync('dist/js');
-vueJsAssets.forEach((element, index) => {
+vueJsAssets.forEach((element) => {
   if(element.indexOf('.js') !== -1 && element.indexOf('.js.map') === -1){
-    podlet.js({ value: "http://localhost:7101/js/" + element, defer: true });
+    podlet.js({ value: `${process.env.ENTRY_BASE_URL}/js/${element}`, defer: true });
   }
 });
 // create a static link to the files for demo purposes. 
@@ -44,5 +53,12 @@ app.get(podlet.manifest(), (req, res) => {
   res.status(200).send(podlet);
 });
 
-//start the app at port 7101
-app.listen(7101);
+app.set('port', process.env.PORT || port);
+
+app.listen(app.get('port'), function () {
+  console.log('Servidor en puerto ' + app.get('port'));
+  console.log('Ir a http://localhost:' + app.get('port'));
+  console.log('MODE:' + process.env.NODE_ENV);
+  console.log('BASE:' + process.env.ENTRY_BASE_URL);  
+});
+

@@ -5,7 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "start": "set NODE_ENV=production && node podlet.js ",
+    "start:dev": "set NODE_ENV=development && node podlet.js "
   },
   "dependencies": {
     "@podium/browser": "^1.0.0-beta.2",
