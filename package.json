@@ -13,9 +13,9 @@
     "@podium/browser": "^1.0.0-beta.2",
     "@podium/podlet": "^4.3.3",
     "core-js": "^3.6.5",
+    "dotenv": "^9.0.0",
     "express": "^4.17.1",
-    "vue": "^2.6.11",
-    "dotenv": "^9.0.0"
+    "vue": "^2.6.11"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",
