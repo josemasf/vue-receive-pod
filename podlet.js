@@ -1,14 +1,15 @@
 const express = require("express");
+const app = express();
+
 const Podlet = require("@podium/podlet");
 const fs = require("fs");
-
-const app = express();
 
 const dotenv = require('dotenv');
 
 dotenv.config({
   path: `process.env`
 });
+
 
 const port = process.env.PORT || 7101 
 
